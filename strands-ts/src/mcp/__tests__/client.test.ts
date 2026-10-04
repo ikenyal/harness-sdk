@@ -942,6 +942,14 @@ describe('MCP Integration', () => {
       },
     }
 
+    describe('mcpClient', () => {
+      it('exposes the original client without allowing reassignment', () => {
+        expect(tool.mcpClient).toBe(mockClientWrapper)
+        expect(() => Object.assign(tool, { mcpClient: {} })).toThrow(TypeError)
+        expect(tool.mcpClient).toBe(mockClientWrapper)
+      })
+    })
+
     it('forwards the tool execution cancelSignal to callTool', async () => {
       vi.mocked(mockClientWrapper.callTool).mockResolvedValue({
         content: [{ type: 'text', text: 'ok' }],
