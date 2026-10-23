@@ -319,11 +319,6 @@ class ToolRegistry:
 
         Args:
             tool_name: Name of the tool to remove.
-
-        Example:
-            ```python
-            agent.tool_registry.remove(my_tool.tool_name)
-            ```
         """
         self.registry.pop(tool_name, None)
         self.dynamic_tools.pop(tool_name, None)

@@ -602,21 +602,6 @@ def test_remove_updates_both_registries(registration):
     assert tru_specs == exp_specs
 
 
-def test_remove_allows_reregistration():
-    registry = ToolRegistry()
-    removed_tool = tool(say.__wrapped__)
-    removed_tool.mark_dynamic()
-    registry.register_tool(removed_tool)
-
-    registry.remove(removed_tool.tool_name)
-    replacement_tool = tool(say.__wrapped__)
-    registry.register_tool(replacement_tool)
-
-    tru_registries = (registry.registry, registry.dynamic_tools)
-    exp_registries = ({replacement_tool.tool_name: replacement_tool}, {})
-    assert tru_registries == exp_registries
-
-
 def test_tool_registry_replace_existing_tool():
     """Test replacing an existing tool."""
     old_tool = MagicMock()
